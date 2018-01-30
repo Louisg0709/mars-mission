@@ -1,2 +1,2 @@
 # mars-mission
-rocketto mars on matlab
+rocket to mars on matlab
