@@ -18,8 +18,8 @@ mmars=6.42e23 ; %mass mars
 dem=381.5e6; %dist moon-earth metres
 xm=381.5e6; %xpos moon
 ym=0; %ypos moon
-vxm=0; %moon speed in orbit x-direction
-vym=1023.1;
+vxm=;
+vym=;
 
 
 xe=0; %x position of earth
@@ -31,10 +31,10 @@ xs=0; %x position of sun
 ys=149.6e9; %y position of sun
 
 
-xma=0; %xpos mars
+xma=-24130; %xpos mars
 yma=225e9; %ypos mars
-vxma=-24130;
-vyma=0;
+vxma=;
+vyma=;
 
 
 
@@ -82,16 +82,11 @@ hax3=line([re+box re+box], [-re-box +re+box]);
 hax4=line([-re-box re+box], [-re-box -re-box]);
 
   set( hax1 , 'Color' ,'red' );
-plot( xe , ye ,'o','MarkerFaceColor','r','MarkerSize',30);
+plot( 0 , 0 ,'o','MarkerFaceColor','r','MarkerSize',30);
 hold on;
 h=plot( x , y ,'o','MarkerFaceColor','g','MarkerSize',10);
 hold on;
 hm=plot( xm , ym ,'o','MarkerFaceColor','b','MarkerSize',10);
-hold on;
-plot( xma , yma ,'o','MarkerFaceColor','r','MarkerSize',30);
-hold on;
-
-plot( xs , ys ,'o','MarkerFaceColor','r','MarkerSize',90);
 hold on;
 
 

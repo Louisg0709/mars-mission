@@ -139,25 +139,20 @@ hm.YDataSource = 'ym';
 %earth
        gx=0;
        gy=0;
-       [gxt,gyt]=gravaccel(xe,xma,ye,yma,mmars);%mars contrib
+       [gxt,gyt]=gravaccel(xe,xma,ye,yma,mmars);%earth contrib
        gx=gx+gxt;
        gy=gy+gyt;
       [gxt,gyt]=gravaccel(xe,xs,ye,ys,ms);%sun contrib
        gx=gx+gxt;
        gy=gy+gyt;       
-      [gxt,gyt]=gravaccel(xe,xm,ye,ym,mm);%moon contrib
-       gx=gx+gxt;
-       gy=gy+gyt;  
-       
-       
-       
+            
        %update velocity
        newvy=vye-gy*dt;
        newvx=vxe-gx*dt;
        xe=xe+0.5*(vxe+newvx)*dt;
        ye=ye+0.5*(vye+newvy)*dt;
        vxe=newvx;
-       vye=newvy; 
+       vyma=newvy; 
 
 
 end
