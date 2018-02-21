@@ -136,15 +136,13 @@ he.YDataSource = 'ye';
 
        gx=0;
        gy=0;
-% % % commented out testing mars only satellite fixed 3 comments       
-% % %        [gxt,gyt]=gravaccel(xma,xe,yma,ye,me);%earth contrib
-% % %        gx=gx+gxt;
-% % %        gy=gy+gyt;
+       [gxt,gyt]=gravaccel(xma,xe,yma,ye,me);%earth contrib
+       gx=gx+gxt;
+       gy=gy+gyt;
       [gxt,gyt]=gravaccel(xma,xs,yma,ys,ms);%sun contrib
        gx=gx+gxt;
        gy=gy+gyt;       
-
-       
+            
        %update velocity
        newvy=vyma-gy*dt;
        newvx=vxma-gx*dt;
@@ -152,9 +150,8 @@ he.YDataSource = 'ye';
        yma=yma+0.5*(vyma+newvy)*dt;
        vxma=newvx;
        vyma=newvy;       
-%%
-
-%%earth
+       
+%earth
        gx=0;
        gy=0;
        [gxt,gyt]=gravaccel(xe,xma,ye,yma,mmars);%mars contrib
@@ -168,14 +165,14 @@ he.YDataSource = 'ye';
        gy=gy+gyt;  
        
        
-% % % commented out testing mars only satellite fixed 3 comments     
-% % %        %update velocity
-% % %        newvy=vye-gy*dt;
-% % %        newvx=vxe-gx*dt;
-% % %        xe=xe+0.5*(vxe+newvx)*dt;
-% % %        ye=ye+0.5*(vye+newvy)*dt;
-% % %        vxe=newvx;
-% % %        vye=newvy; 
+       
+       %update velocity
+       newvy=vye-gy*dt;
+       newvx=vxe-gx*dt;
+       xe=xe+0.5*(vxe+newvx)*dt;
+       ye=ye+0.5*(vye+newvy)*dt;
+       vxe=newvx;
+       vye=newvy; 
 
 
 end
