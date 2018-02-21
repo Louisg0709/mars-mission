@@ -26,6 +26,8 @@ xe=0; %x position of earth
 ye=0; %y position of earth
 vxe=30000;
 vye=0;
+vxm=vxm+vxe; %moon speed in orbit x-direction
+vym=vye+1023.1;
 
 xs=0; %x position of sun
 ys=149.6e9; %y position of sun

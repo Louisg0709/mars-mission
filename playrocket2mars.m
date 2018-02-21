@@ -122,13 +122,13 @@ he.YDataSource = 'ye';
        gy=gy+gyt;       
 
 % % % commented out testing mars only satellite fixed 3 comments      
-% % %        %update velocity
-% % %        newvy=vym-gy*dt;
-% % %        newvx=vxm-gx*dt;
-% % %        xm=xm+0.5*(vxm+newvx)*dt;
-% % %        ym=ym+0.5*(vym+newvy)*dt;
-% % %        vxm=newvx;
-% % %        vym=newvy;
+       %update velocity
+       newvy=vym-gy*dt;
+       newvx=vxm-gx*dt;
+       xm=xm+0.5*(vxm+newvx)*dt;
+       ym=ym+0.5*(vym+newvy)*dt;
+       vxm=newvx;
+       vym=newvy;
 
 %%
 
