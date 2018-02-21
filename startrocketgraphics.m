@@ -10,16 +10,16 @@ hax3=line([re+box re+box], [-re-box +re+box]);
 hax4=line([-re-box re+box], [-re-box -re-box]);
 
   set( hax1 , 'Color' ,'red' );
-plot( xe , ye ,'o','MarkerFaceColor','r','MarkerSize',30);
+he=plot( xe , ye ,'o','MarkerFaceColor','b','MarkerSize',5);
 hold on;
-h=plot( x , y ,'o','MarkerFaceColor','g','MarkerSize',10);
+h=plot( x , y ,'o','MarkerFaceColor','g','MarkerSize',4);
 hold on;
-hm=plot( xm , ym ,'o','MarkerFaceColor','b','MarkerSize',10);
+hm=plot( xm , ym ,'o','MarkerFaceColor','b','MarkerSize',4);
 hold on;
-plot( xma , yma ,'o','MarkerFaceColor','r','MarkerSize',30);
+hma=plot( xma , yma ,'o','MarkerFaceColor','r','MarkerSize',5);
 hold on;
 
-plot( xs , ys ,'o','MarkerFaceColor','r','MarkerSize',90);
+hs=plot( xs , ys ,'o','MarkerFaceColor','y','MarkerSize',7);
 hold on;
 
 

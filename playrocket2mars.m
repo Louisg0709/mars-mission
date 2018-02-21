@@ -1,3 +1,4 @@
+
 pause;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %the program
@@ -34,7 +35,7 @@ hm.YDataSource = 'ym';
        gy=gy+g*(y-ys)/r; 
        
        %grav force mars
-       [gxt,gyt]=gravaccel(x,xma,y,yma,mmars)
+       [gxt,gyt]=gravaccel(x,xma,y,yma,mmars);
        gx=gx+gxt;
        gy=gy+gyt;
        

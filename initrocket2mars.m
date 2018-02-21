@@ -52,7 +52,7 @@ dt=1; %time step
 %launch angle
 theta=0;
 % box=20000000;
-box=800e6; %include moon
+box=4.5e11; %include moon
  %theta is in degrees here
 
 %initial speed
