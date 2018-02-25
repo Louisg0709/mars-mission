@@ -44,6 +44,7 @@ const.mm=7.342e22; %moonmas kg
 const.ms=1.99e30; %mass sun
 const.mmars=6.42e23 ; %mass mars
 const.dem=381.5e6; %average dist moon-earth metres
+const.mr=1.0; %mass of rocket
 
 
 
@@ -51,6 +52,8 @@ const.dem=381.5e6; %average dist moon-earth metres
 
 %%
 %%state vars
+
+state.time=0; %time hours
 state.xe=0; %x position of earth
 state.ye=0; %y position of earth
 state.vxe=30000;% x-speed of the earth
@@ -88,10 +91,14 @@ state.vy=state.u*sin(state.theta);
 
 %%
 %control vars
-control.nsteps=400000;
+control.nsteps=500000;
 control.dt=1; %time step
 control.theta=0;
 control.box=800e6; %include moon
+control.saveinterval=control.nsteps;
+control.fx=0; %fx and fy force on rocket (thrust from motors)
+control.fy=0;
+
 
 %% 
 thetam=0;

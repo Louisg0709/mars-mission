@@ -128,13 +128,13 @@ function saveinterval_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of saveinterval as text
 %        str2double(get(hObject,'String')) returns contents of saveinterval as a double
-volume = str2double(get(hObject, 'String'));
-if isnan(volume)
-    set(hObject, 'String', 0);
-    errordlg('Input must be a number','Error');
-end
 
-handles.control.saveinterval=str2double(get(hObject, 'String'));
+% if isnan(volume)
+%     set(hObject, 'String', 0);
+%     errordlg('Input must be a number','Error');
+% end
+handles.control.saveinterval = str2int(get(hObject, 'String'));
+%handles.control.saveinterval=str2double(get(hObject, 'String'));
 % Save the new saveinterval value
 handles.metricdata.volume = volume;
 guidata(hObject,handles)
@@ -161,7 +161,7 @@ function unitgroup_SelectionChangedFcn(hObject, eventdata, handles)
 % hObject    handle to the selected object in unitgroup 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+set(handles.textactualtime, 'String', num2str(handles.state.time));
 if (hObject == handles.earth)
     set(handles.textvx, 'String', num2str(handles.state.vxe/1000));
     set(handles.textvy, 'String', num2str(handles.state.vye/1000));
@@ -213,8 +213,12 @@ if isfield(handles, 'metricdata') && ~isreset
     return;
 end
 
+global statearray;
 global stop_state;
+global js;
 stop_state=0;
+statearray(1)=handles.state;
+js=2; %first state is always saved
 %stop_state=0;
 %stop_state=0;
 handles.metricdata.density = 0;
@@ -306,6 +310,8 @@ function fx_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of fx as text
 %        str2double(get(hObject,'String')) returns contents of fx as a double
+handles.control.fx = str2double(get(hObject, 'String'));
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -329,6 +335,9 @@ function fy_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of fy as text
 %        str2double(get(hObject,'String')) returns contents of fy as a double
+handles.control.fy = str2double(get(hObject, 'String'));
+guidata(hObject,handles);
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -352,11 +361,19 @@ function simloop(hObject,eventdata,handles)
 % handles.simdata.dt = 0.1;
 % handles.simdata.radius = 1;
 global stop_state;
+global statearray;
+global js;
+
 
 for i=0:500000
     
     handles.state=updatestate(handles.state, handles.control, handles.const,handles.figh);
-    
+    handles.state.time=  handles.state.time+(control.dt/3600);
+    if mod(i,handles.control.saveinterval)==0
+        statearray(js)=handles.state;
+        j=j+1;
+        save('currentstate.mat','statearray');        
+    end
     %handles.stop_state = get(handles.pushbutton7, 'Value');
     if stop_state
         stop_state=0;

@@ -42,6 +42,8 @@ figh.he.YDataSource = 'ye';
        gx=gx+gxt;
        gy=gy+gyt;      
              
+       gx=gx+control.fx/const.mr;
+       gy=gy+control.fy/const.mr;  
        
        %calculate vy
        newvy=state.vy-gy*control.dt;
