@@ -133,7 +133,7 @@ function saveinterval_Callback(hObject, eventdata, handles)
 %     set(hObject, 'String', 0);
 %     errordlg('Input must be a number','Error');
 % end
-handles.control.saveinterval = str2int(get(hObject, 'String'));
+handles.control.saveinterval = str2num(get(hObject, 'String'));
 %handles.control.saveinterval=str2double(get(hObject, 'String'));
 % Save the new saveinterval value
 handles.metricdata.volume = volume;
@@ -179,7 +179,7 @@ elseif (hObject == handles.moon)
     set(handles.text5, 'String', 'cu.m');
     set(handles.text6, 'String', 'kg');
 elseif (hObject == handles.rocket)
-        set(handles.textvx, 'String', num2str(handles.state.vx/1000));
+    set(handles.textvx, 'String', num2str(handles.state.vx/1000));
     set(handles.textvy, 'String', num2str(handles.state.vy/1000));
     set(handles.textx, 'String', num2str(handles.state.x/1000));
     set(handles.texty, 'String', num2str(handles.state.y/1000));
@@ -195,7 +195,7 @@ elseif (hObject == handles.mars)
     set(handles.text5, 'String', 'cu.m');
     set(handles.text6, 'String', 'kg');
 elseif (hObject == handles.sun)
-        set(handles.textvx, 'String', num2str(handles.state.vxs/1000));
+    set(handles.textvx, 'String', num2str(handles.state.vxs/1000));
     set(handles.textvy, 'String', num2str(handles.state.vys/1000));
     set(handles.textx, 'String', num2str(handles.state.xs/1000));
     set(handles.texty, 'String', num2str(handles.state.ys/1000));
@@ -217,7 +217,7 @@ global statearray;
 global stop_state;
 global js;
 stop_state=0;
-statearray(1)=handles.state;
+
 js=2; %first state is always saved
 %stop_state=0;
 %stop_state=0;
@@ -242,7 +242,7 @@ handles.control=control;
 %handles.control.dt=12;
 handles.const=const;
 handles.figh=figh;
-
+statearray(1)=handles.state;
 % Update handles structure
 guidata(handles.figure1, handles);
 
@@ -311,6 +311,7 @@ function fx_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of fx as text
 %        str2double(get(hObject,'String')) returns contents of fx as a double
 handles.control.fx = str2double(get(hObject, 'String'));
+%set(handles.control.fx, 'String', handles.metricdata.density);
 guidata(hObject,handles);
 
 
@@ -368,10 +369,10 @@ global js;
 for i=0:500000
     
     handles.state=updatestate(handles.state, handles.control, handles.const,handles.figh);
-    handles.state.time=  handles.state.time+(control.dt/3600);
+    handles.state.time=  handles.state.time+(handles.control.dt/3600);
     if mod(i,handles.control.saveinterval)==0
         statearray(js)=handles.state;
-        j=j+1;
+        js=js+1;
         save('currentstate.mat','statearray');        
     end
     %handles.stop_state = get(handles.pushbutton7, 'Value');

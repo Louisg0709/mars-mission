@@ -65,7 +65,8 @@ state.vym=state.vye+1023.1;
 
 
 
-
+state.vxs=0.0;
+state.vys=0.0;
 state.xs=0; %x position of sun
 state.ys=149.6e9; %y position of sun
 
