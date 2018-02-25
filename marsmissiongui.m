@@ -22,7 +22,7 @@ function varargout = marsmissiongui(varargin)
 
 % Edit the above text to modify the response to help marsmissiongui
 
-% Last Modified by GUIDE v2.5 24-Feb-2018 14:24:37
+% Last Modified by GUIDE v2.5 25-Feb-2018 21:00:07
 
 % Begin initialization code - DO NOT EDIT
 
@@ -170,6 +170,7 @@ if (hObject == handles.earth)
     set(handles.text4, 'String', 'lb/cu.in');
     set(handles.text5, 'String', 'cu.in');
     set(handles.text6, 'String', 'lb');
+    handles.selected='earth';
 elseif (hObject == handles.moon)
         set(handles.textvx, 'String', num2str(handles.state.vxm/1000));
     set(handles.textvy, 'String', num2str(handles.state.vym/1000));
@@ -178,6 +179,7 @@ elseif (hObject == handles.moon)
     set(handles.text4, 'String', 'kg/cu.m');
     set(handles.text5, 'String', 'cu.m');
     set(handles.text6, 'String', 'kg');
+    handles.selected='moon';
 elseif (hObject == handles.rocket)
     set(handles.textvx, 'String', num2str(handles.state.vx/1000));
     set(handles.textvy, 'String', num2str(handles.state.vy/1000));
@@ -186,6 +188,7 @@ elseif (hObject == handles.rocket)
     set(handles.text4, 'String', 'kg/cu.m');
     set(handles.text5, 'String', 'cu.m');
     set(handles.text6, 'String', 'kg');
+    handles.selected='rocket';
 elseif (hObject == handles.mars)
         set(handles.textvx, 'String', num2str(handles.state.vxma/1000));
     set(handles.textvy, 'String', num2str(handles.state.vyma/1000));
@@ -194,6 +197,7 @@ elseif (hObject == handles.mars)
     set(handles.text4, 'String', 'kg/cu.m');
     set(handles.text5, 'String', 'cu.m');
     set(handles.text6, 'String', 'kg');
+    handles.selected='mars';
 elseif (hObject == handles.sun)
     set(handles.textvx, 'String', num2str(handles.state.vxs/1000));
     set(handles.textvy, 'String', num2str(handles.state.vys/1000));
@@ -202,8 +206,9 @@ elseif (hObject == handles.sun)
     set(handles.text4, 'String', 'kg/cu.m');
     set(handles.text5, 'String', 'cu.m');
     set(handles.text6, 'String', 'kg');
+    handles.selected= 'sun';
 end
-
+guidata(hObject,handles)
 % --------------------------------------------------------------------
 function initialize_gui(fig_handle, handles, isreset)
 % If the metricdata field is present and the reset flag is false, it means
@@ -234,6 +239,8 @@ set(handles.text4, 'String', 'lb/cu.in');
 set(handles.text5, 'String', 'cu.in');
 set(handles.text6, 'String', 'lb');
 
+handles.selected='earth';
+%set(handles.selected, 'String', 'earth');
 [state,const,control]=initmarsmission();
 figh=startrocketgraphics(state); %returns handle to the graphics
 
@@ -409,3 +416,26 @@ state=handles.state;
 control=handles.control;
 uisave({'const','control','state'},'marsmission.mat');
 guidata(hObject,handles);
+
+
+% --------------------------------------------------------------------
+function distance_Callback(hObject, eventdata, handles)
+% hObject    handle to distance (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+distancedlg(handles.selected, handles.state, handles.control, handles.const);
+
+
+% --------------------------------------------------------------------
+function orbitalspeed_Callback(hObject, eventdata, handles)
+% hObject    handle to orbitalspeed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+orbitalspeeddlg(handles.selected, handles.state, handles.control, handles.const);
+
+% --------------------------------------------------------------------
+function orbitalangle_Callback(hObject, eventdata, handles)
+% hObject    handle to orbitalangle (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+orbitalangledlg(handles.selected, handles.state, handles.control, handles.const);
